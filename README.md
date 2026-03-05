@@ -7,6 +7,19 @@ The application stores tasks using **Local Storage**, so tasks remain saved even
 
 ---
 
+## 🚀 Live Demo
+
+👉 [View Live Project](https://samarthsethi66-cyber.github.io/my-to-do-project/)
+
+---
+
+## 📸 Screenshot
+
+![Todo App Screenshot](./screenshot.png)
+
+
+---
+
 ## Features
 
 * Add new tasks easily
