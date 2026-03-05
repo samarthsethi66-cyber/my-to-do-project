@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Advanced Todo App</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6fb;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+width:500px;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+input,select{
+padding:7px;
+border:1px solid #ccc;
+border-radius:5px;
+margin:3px;
+}
+
+button{
+padding:8px 10px;
+border:none;
+background:#4CAF50;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#43a047;
+}
+
+ul{
+padding:0;
+}
+
+li{
+list-style:none;
+background:#f9f9f9;
+margin-top:10px;
+padding:10px;
+border-radius:6px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.task-info{
+display:flex;
+flex-direction:column;
+}
+
+.priority{
+width:15px;
+height:15px;
+border-radius:50%;
+margin-right:5px;
+display:inline-block;
+}
+
+.delete{
+background:red;
+}
+
+.status{
+background:#2196F3;
+margin-right:5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Advanced Todo Manager</h2>
+
+<input type="text" id="taskInput" placeholder="Enter Task">
+
+<input type="date" id="taskDate">
+
+<input type="time" id="taskTime">
+
+<select id="status">
+<option>To-Do</option>
+<option>Started</option>
+<option>Running</option>
+<option>Pending</option>
+<option>Complete</option>
+</select>
+
+<select id="priority">
+<option value="red">High Priority</option>
+<option value="orange">Medium Priority</option>
+<option value="green">Low Priority</option>
+</select>
+
+<button onclick="addTask()">Add Task</button>
+
+<ul id="taskList"></ul>
+
+</div>
+
+<script>
+
+let tasks = JSON.parse(localStorage.getItem("tasks")) || []
+
+function saveTasks(){
+localStorage.setItem("tasks",JSON.stringify(tasks))
+}
+
+function renderTasks(){
+
+let list=document.getElementById("taskList")
+list.innerHTML=""
+
+tasks.forEach((task,index)=>{
+
+let li=document.createElement("li")
+
+li.innerHTML=`
+
+<div class="task-info">
+<span><span class="priority" style="background:${task.priority}"></span>${task.text}</span>
+<span>Date: ${task.date} | Time: ${task.time}</span>
+<span>Status: ${task.status}</span>
+</div>
+
+<div>
+<button class="delete" onclick="deleteTask(${index})">Delete</button>
+</div>
+
+`
+
+list.appendChild(li)
+
+})
+
+}
+
+function addTask(){
+
+let text=document.getElementById("taskInput").value
+let date=document.getElementById("taskDate").value
+let time=document.getElementById("taskTime").value
+let status=document.getElementById("status").value
+let priority=document.getElementById("priority").value
+
+if(text===""){
+alert("Enter task")
+return
+}
+
+tasks.push({
+text:text,
+date:date,
+time:time,
+status:status,
+priority:priority
+})
+
+saveTasks()
+renderTasks()
+
+document.getElementById("taskInput").value=""
+
+}
+
+function deleteTask(index){
+
+tasks.splice(index,1)
+
+saveTasks()
+renderTasks()
+
+}
+
+renderTasks()
+
+</script>
+
+</body>
+</html>
