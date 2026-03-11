@@ -111,6 +111,4 @@ The task will appear in the list and will automatically be saved in **Local Stor
 
 ## Author
 
-Created by **Bottle Kumar**
-
-If you like this project, feel free to ⭐ the repository and share it.
+Created by samarth sethi 
